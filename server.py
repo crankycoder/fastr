@@ -13,12 +13,13 @@
 # limitations under the License.
 """The Python implementation of the GRPC helloworld.Greeter server."""
 
-from concurrent import futures
 import logging
+import asyncio
+from grpc import aio
 
-import grpc
 
 from fastr.proto_lib import helloworld_pb2_grpc
+from fastr.proto_lib import helloworld_pb2
 
 
 class Greeter(helloworld_pb2_grpc.GreeterServicer):
@@ -26,14 +27,16 @@ class Greeter(helloworld_pb2_grpc.GreeterServicer):
         return helloworld_pb2.HelloReply(message="Hello, %s!" % request.name)
 
 
-def serve():
-    server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
+async def serve():
+    server = aio.server()
     helloworld_pb2_grpc.add_GreeterServicer_to_server(Greeter(), server)
-    server.add_insecure_port("[::]:50051")
-    server.start()
-    server.wait_for_termination()
+    listen_addr = "[::]:50051"
+    server.add_insecure_port(listen_addr)
+    logging.info("Starting server on %s", listen_addr)
+    await server.start()
+    await server.wait_for_termination()
 
 
 if __name__ == "__main__":
-    logging.basicConfig()
-    serve()
+    logging.basicConfig(level=logging.INFO)
+    asyncio.run(serve())
