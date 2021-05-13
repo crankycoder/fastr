@@ -7,11 +7,12 @@ authors = ["Victor Ng <victor@draper.ai>"]
 [tool.poetry.dependencies]
 python = "^3.8"
 lmdb = "^1.2.1"
-betterproto = {extras = ["compiler"], version = "^1.2.5"}
+betterproto = "v2.0.0b3"
 Flask = "^2.0.0"
 google-cloud-storage = "^1.38.0"
 grpclib = "^0.4.1"
 grpcio-tools = "^1.37.1"
+grpcio = "^1.37.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
