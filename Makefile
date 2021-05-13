@@ -17,4 +17,4 @@ protolib:
 	 python -m grpc_tools.protoc -I protos --python_out=fastr/proto_lib --grpc_python_out=fastr/proto_lib example.proto
 
 loadtest:
-	ghz -n 2000 -c 10 --insecure --proto ./protos/helloworld.proto --call helloworld.Greeter.SayHello -d '{"name":"vng"}' 0.0.0.0:50051
+	ghz -n 20000 -c 10 --insecure --proto ./protos/helloworld.proto --call helloworld.Greeter.SayHello -d '{"name":"vng"}' 0.0.0.0:50051
