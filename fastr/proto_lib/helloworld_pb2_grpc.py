@@ -2,7 +2,7 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from fastr.proto_lib import helloworld_pb2 as helloworld__pb2
+from fastr.proto_lib import helloworld_pb2 as fastr_dot_proto__lib_dot_helloworld__pb2
 
 
 class GreeterStub(object):
@@ -16,14 +16,14 @@ class GreeterStub(object):
             channel: A grpc.Channel.
         """
         self.SayHello = channel.unary_unary(
-                '/helloworld.Greeter/SayHello',
-                request_serializer=helloworld__pb2.HelloRequest.SerializeToString,
-                response_deserializer=helloworld__pb2.HelloReply.FromString,
+                '/fastr.proto_lib.Greeter/SayHello',
+                request_serializer=fastr_dot_proto__lib_dot_helloworld__pb2.HelloRequest.SerializeToString,
+                response_deserializer=fastr_dot_proto__lib_dot_helloworld__pb2.HelloReply.FromString,
                 )
         self.SayHelloAgain = channel.unary_unary(
-                '/helloworld.Greeter/SayHelloAgain',
-                request_serializer=helloworld__pb2.HelloRequest.SerializeToString,
-                response_deserializer=helloworld__pb2.HelloReply.FromString,
+                '/fastr.proto_lib.Greeter/SayHelloAgain',
+                request_serializer=fastr_dot_proto__lib_dot_helloworld__pb2.HelloRequest.SerializeToString,
+                response_deserializer=fastr_dot_proto__lib_dot_helloworld__pb2.HelloReply.FromString,
                 )
 
 
@@ -50,17 +50,17 @@ def add_GreeterServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'SayHello': grpc.unary_unary_rpc_method_handler(
                     servicer.SayHello,
-                    request_deserializer=helloworld__pb2.HelloRequest.FromString,
-                    response_serializer=helloworld__pb2.HelloReply.SerializeToString,
+                    request_deserializer=fastr_dot_proto__lib_dot_helloworld__pb2.HelloRequest.FromString,
+                    response_serializer=fastr_dot_proto__lib_dot_helloworld__pb2.HelloReply.SerializeToString,
             ),
             'SayHelloAgain': grpc.unary_unary_rpc_method_handler(
                     servicer.SayHelloAgain,
-                    request_deserializer=helloworld__pb2.HelloRequest.FromString,
-                    response_serializer=helloworld__pb2.HelloReply.SerializeToString,
+                    request_deserializer=fastr_dot_proto__lib_dot_helloworld__pb2.HelloRequest.FromString,
+                    response_serializer=fastr_dot_proto__lib_dot_helloworld__pb2.HelloReply.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'helloworld.Greeter', rpc_method_handlers)
+            'fastr.proto_lib.Greeter', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
 
 
@@ -80,9 +80,9 @@ class Greeter(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/helloworld.Greeter/SayHello',
-            helloworld__pb2.HelloRequest.SerializeToString,
-            helloworld__pb2.HelloReply.FromString,
+        return grpc.experimental.unary_unary(request, target, '/fastr.proto_lib.Greeter/SayHello',
+            fastr_dot_proto__lib_dot_helloworld__pb2.HelloRequest.SerializeToString,
+            fastr_dot_proto__lib_dot_helloworld__pb2.HelloReply.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -97,8 +97,8 @@ class Greeter(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/helloworld.Greeter/SayHelloAgain',
-            helloworld__pb2.HelloRequest.SerializeToString,
-            helloworld__pb2.HelloReply.FromString,
+        return grpc.experimental.unary_unary(request, target, '/fastr.proto_lib.Greeter/SayHelloAgain',
+            fastr_dot_proto__lib_dot_helloworld__pb2.HelloRequest.SerializeToString,
+            fastr_dot_proto__lib_dot_helloworld__pb2.HelloReply.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
