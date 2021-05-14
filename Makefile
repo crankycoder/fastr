@@ -14,5 +14,9 @@ protolib:
 	 # yet
 	 python -m grpc_tools.protoc -I . --python_out=. --grpc_python_out=. fastr/proto_lib/helloworld.proto
 
+server:
+	python server.py
+
+
 loadtest:
-	ghz -n 20000 -c 10 --insecure --proto ./protos/helloworld.proto --call helloworld.Greeter.SayHello -d '{"name":"vng"}' 0.0.0.0:50051
+	ghz -n 20000 -c 10 --insecure --proto ./fastr/proto_lib/helloworld.proto --call fastr.proto_lib.Greeter.SayHello -d '{"name":"vng"}' 0.0.0.0:50051
